@@ -119,11 +119,11 @@ export function createAirPodsMaxAssembly(): AirPodsMaxAssembly {
     color: new THREE.Color(initial.canopy),
     alphaMap: tex.canopyAlpha,
     bumpMap: tex.canopyBump,
-    bumpScale: 0.018,
+    bumpScale: 0.032,
     transparent: true,
-    alphaTest: 0.18,
-    metalness: 0.02,
-    roughness: 0.82,
+    alphaTest: 0.36,
+    metalness: 0.04,
+    roughness: 0.74,
     side: THREE.DoubleSide,
   });
 
@@ -604,7 +604,8 @@ export function createAirPodsMaxAssembly(): AirPodsMaxAssembly {
       matteBlackInternal
     );
     centerDustDome.rotation.x = -Math.PI * 0.5;
-    centerDustDome.position.z = 0.01;
+    centerDustDome.scale.set(1, 0.28, 1);
+    centerDustDome.position.z = 0.028;
     driverLayer.add(centerDustDome);
 
     if (side === 'R') {

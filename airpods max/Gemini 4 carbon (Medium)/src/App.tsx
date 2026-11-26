@@ -397,7 +397,7 @@ export const App: React.FC = () => {
 
         {/* STAGE 4: ACOUSTIC KNIT-MESH & CANOPY MACRO (44% - 58%) */}
         <section className="stage-section stage-section--left" style={{ height: '154vh' }}>
-          <div className="editorial-block editorial-reveal">
+          <div className="editorial-block editorial-block--compact editorial-reveal">
             <p className="eyebrow">Ergonomic Acoustics</p>
             <h2 className="section-title">
               Weightless canopy.

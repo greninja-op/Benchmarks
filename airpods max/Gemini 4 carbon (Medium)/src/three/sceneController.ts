@@ -151,11 +151,11 @@ export class AirPodsSceneController {
 
     // Define keyframe poses aligned with the 7 scroll stages
     const heroPose: PoseState = {
-      camPos: new THREE.Vector3(0, 0.35, 6.35 * mobileDistScale),
-      camTarget: new THREE.Vector3(0, 0.32, 0),
+      camPos: new THREE.Vector3(0, 0.28, 8.35 * mobileDistScale),
+      camTarget: new THREE.Vector3(0, 0.26, 0),
       fov: 32,
       rootRot: new THREE.Vector3(0.04, -0.22 + s * 1.4, 0),
-      headsetY: 0.1,
+      headsetY: 0.08,
       leftSwivelY: -1.85,
       leftTiltZ: 0.26,
       rightSwivelY: 1.85,
@@ -165,11 +165,11 @@ export class AirPodsSceneController {
     };
 
     const colorsPose: PoseState = {
-      camPos: new THREE.Vector3(0.15, 0.30, 5.95 * mobileDistScale),
-      camTarget: new THREE.Vector3(0, 0.28, 0),
+      camPos: new THREE.Vector3(0.15, 0.26, 8.05 * mobileDistScale),
+      camTarget: new THREE.Vector3(0, 0.24, 0),
       fov: 32,
       rootRot: new THREE.Vector3(0.03, 0.26 * Math.sin(((s - 0.12) / 0.14) * Math.PI), 0),
-      headsetY: 0.08,
+      headsetY: 0.06,
       leftSwivelY: -1.78,
       leftTiltZ: 0.25,
       rightSwivelY: 1.78,
@@ -225,11 +225,11 @@ export class AirPodsSceneController {
 
     // Stage 5: Magnetic Ear Cushion Detach & Snap-Back (4.22.10 PM.jpeg)
     const detachPose: PoseState = {
-      camPos: new THREE.Vector3(0, 0.14, 6.25 * mobileDistScale),
-      camTarget: new THREE.Vector3(0, 0.02, 0),
+      camPos: new THREE.Vector3(0, 0.14, 8.45 * mobileDistScale),
+      camTarget: new THREE.Vector3(0, 0.04, 0),
       fov: 32,
       rootRot: new THREE.Vector3(0.02, 0, 0),
-      headsetY: 0.18,
+      headsetY: 0.12,
       leftSwivelY: -2.92,
       leftTiltZ: 0.21,
       rightSwivelY: 2.92,
@@ -240,7 +240,7 @@ export class AirPodsSceneController {
 
     // Stage 6: 5-Layer Horizontal Engineering Exploded View (4.22.11 PM (1).jpeg)
     const explodedPose: PoseState = {
-      camPos: new THREE.Vector3(2.04, -0.34, 4.48 * (isMobile ? 1.38 : 1.0)),
+      camPos: new THREE.Vector3(2.04, -0.34, 4.75 * (isMobile ? 1.38 : 1.0)),
       camTarget: new THREE.Vector3(2.04, -0.46, -0.16),
       fov: 31,
       rootRot: new THREE.Vector3(0.02, 0.0, 0),
@@ -257,8 +257,8 @@ export class AirPodsSceneController {
     const caseLocalU = THREE.MathUtils.clamp((s - 0.88) / 0.12, 0, 1);
     const descendT = smootherstep(0.18, 0.70, caseLocalU);
     const casePose: PoseState = {
-      camPos: new THREE.Vector3(0, 0.34, 6.55 * mobileDistScale),
-      camTarget: new THREE.Vector3(0, 0.24, 0),
+      camPos: new THREE.Vector3(0, 0.30, 8.35 * mobileDistScale),
+      camTarget: new THREE.Vector3(0, 0.22, 0),
       fov: 32,
       rootRot: new THREE.Vector3(0.01, 0, 0),
       headsetY: THREE.MathUtils.lerp(0.68, 0.02, descendT),

@@ -147,8 +147,8 @@ export const LEADER_CALLOUTS: LeaderCalloutSpec[] = [
     title: 'Digital Crown',
     subtitle: '84 Radial Micro-Knurls',
     detail: 'Turn for ultra-fine volume control. Press once to play, pause, or answer calls; twice to skip forward; hold for Siri.',
-    side: 'right',
-    offsetY: -85,
+    side: 'left',
+    offsetY: -90,
   },
   {
     id: 'noise-control',
@@ -157,8 +157,8 @@ export const LEADER_CALLOUTS: LeaderCalloutSpec[] = [
     title: 'Noise Control Button',
     subtitle: 'Flush Tactile Switch',
     detail: 'Instantly toggle between industry-leading Active Noise Cancellation and natural Transparency mode.',
-    side: 'left',
-    offsetY: -50,
+    side: 'right',
+    offsetY: -65,
   },
   {
     id: 'beamforming-mic',
@@ -167,7 +167,7 @@ export const LEADER_CALLOUTS: LeaderCalloutSpec[] = [
     title: 'Acoustic Vent & Mic',
     subtitle: 'Nine-Microphone Array',
     detail: 'Six outward-facing and two inward-facing mics isolate voice and cancel wind & environmental noise 200x per second.',
-    side: 'right',
+    side: 'left',
     offsetY: 85,
   },
   {
