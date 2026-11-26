@@ -12,4 +12,18 @@ Serve the dist/ directory from any static web server. The page imports the pinne
 - Select a finish in the color chapter to pin the headset, cushions, canopy, and Smart Case to that color.
 - Move the pointer for a restrained parallax tilt.
 
+## Website sections
+
+| Sculpture & finishes | Digital Crown & controls |
+|:--:|:--:|
+| ![Sculpture and finishes](dist/assets/front-silhouette.webp) | ![Digital Crown and controls](dist/assets/crown-macro.webp) |
+
+| Knit materials & cushion | Magnetic detach & engineering |
+|:--:|:--:|
+| ![Knit materials and cushion](dist/assets/cushion-detail.webp) | ![Magnetic detach and internal engineering](dist/assets/exploded-anatomy.webp) |
+
+| Smart Case |
+|:--:|
+| ![Smart Case finale](dist/assets/smart-case.webp) |
+
 The internal component geometry is an illustrative reconstruction based on the supplied reference frames and Apple’s published hardware description. It is not service documentation or a reverse-engineered CAD model.
