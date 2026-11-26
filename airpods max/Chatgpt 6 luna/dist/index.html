@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f3f3f1" />
+    <meta name="description" content="An interactive, procedural study of AirPods Max: material, acoustics, and the details between." />
+    <title>AirPods Max — Form in Motion</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preload" href="./assets/front-silhouette.webp" as="image" type="image/webp" />
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #f3f3f1;
+        --ink: #1a1b1c;
+        --muted: #737575;
+        --hairline: rgba(30, 34, 35, .13);
+        --edge: clamp(24px, 5.4vw, 88px);
+        --canvas-width: 67vw;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, "Helvetica Neue", Arial, sans-serif;
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: auto; background: var(--paper); }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(ellipse at 76% 40%, rgba(255,255,255,.95) 0%, rgba(255,255,255,.6) 31%, transparent 66%),
+          linear-gradient(118deg, #f4f4f2 4%, #eceeec 100%);
+        overflow-x: hidden;
+      }
+      a { color: inherit; }
+      button { font: inherit; }
+      .masthead {
+        position: fixed;
+        z-index: 20;
+        inset: 0 0 auto;
+        height: 76px;
+        padding: 0 var(--edge);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        pointer-events: none;
+      }
+      .brand, .edition, .nav-meta { pointer-events: auto; }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 13px;
+        letter-spacing: -.02em;
+        font-weight: 650;
+      }
+      .brand-mark {
+        display: grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        border: 1px solid rgba(30,34,35,.28);
+        border-radius: 50%;
+        font-size: 10px;
+        letter-spacing: -.08em;
+        font-weight: 700;
+      }
+      .edition {
+        color: #666a6a;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+      }
+      .nav-meta {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        color: #666a6a;
+        font-size: 11px;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+      .nav-meta a { text-decoration: none; transition: color .2s ease; }
+      .nav-meta a:hover { color: #111; }
+      .scene-panel {
+        position: fixed;
+        z-index: 2;
+        top: 0;
+        right: 0;
+        width: var(--canvas-width);
+        height: 100svh;
+        overflow: hidden;
+        pointer-events: none;
+        background:
+          radial-gradient(ellipse at 52% 48%, rgba(255,255,255,.72) 0%, rgba(255,255,255,.18) 36%, transparent 68%);
+      }
+      #product-view {
+        display: block;
+        width: 100%;
+        height: 100%;
+        outline: none;
+      }
+      .fallback-image {
+        display: none;
+        position: absolute;
+        width: min(82%, 700px);
+        height: auto;
+        max-height: 76%;
+        object-fit: contain;
+        inset: 12% 7% auto auto;
+        mix-blend-mode: multiply;
+      }
+      .leader-svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      .leader-svg path {
+        fill: none;
+        stroke: rgba(35, 39, 39, .62);
+        stroke-width: 1;
+        vector-effect: non-scaling-stroke;
+      }
+      .leader-svg circle {
+        fill: #f7f8f6;
+        stroke: rgba(35,39,39,.74);
+        stroke-width: 1;
+        vector-effect: non-scaling-stroke;
+      }
+      .callout {
+        display: none;
+        position: absolute;
+        width: 190px;
+        padding: 13px 15px 14px;
+        color: #222626;
+        background: rgba(250, 251, 249, .77);
+        border: 1px solid rgba(255,255,255,.75);
+        border-radius: 13px;
+        box-shadow: 0 10px 35px rgba(27,32,34,.08);
+        -webkit-backdrop-filter: blur(16px);
+        backdrop-filter: blur(16px);
+      }
+      .callout.is-visible { display: block; }
+      .callout .kicker {
+        display: block;
+        color: #737777;
+        font-size: 9px;
+        font-weight: 650;
+        letter-spacing: .13em;
+        text-transform: uppercase;
+      }
+      .callout strong {
+        display: block;
+        margin-top: 5px;
+        font-size: 13px;
+        line-height: 1.35;
+        letter-spacing: -.02em;
+        font-weight: 620;
+      }
+      .callout p {
+        margin: 4px 0 0;
+        color: #686d6d;
+        font-size: 11px;
+        line-height: 1.45;
+      }
+      .callout.crown { right: 3.8%; top: 29%; }
+      .callout.mode { right: 3.8%; top: 47%; }
+      .callout.chip { left: 3.6%; top: 28%; }
+      .callout.driver { left: 3.6%; top: 47%; }
+      .callout.cushion { left: 3.6%; top: 66%; }
+      main { position: relative; z-index: 4; }
+      .chapter {
+        position: relative;
+        height: calc(var(--duration) * 1svh);
+        min-height: calc(var(--duration) * 1svh);
+        display: flex;
+        align-items: center;
+        padding: 90px var(--edge) 52px;
+      }
+      .copy {
+        width: min(37vw, 490px);
+        margin-left: clamp(0px, 2.2vw, 36px);
+        opacity: .35;
+        transform: translateY(18px);
+        transition: opacity .55s ease, transform .75s cubic-bezier(.2,.75,.25,1);
+      }
+      .chapter.is-active .copy { opacity: 1; transform: translateY(0); }
+      .chapter[data-chapter="1"] { align-items: center; }
+      .chapter[data-chapter="1"] .copy { margin-top: -7vh; }
+      .eyebrow {
+        margin: 0 0 19px;
+        color: #6d7272;
+        font-size: 10px;
+        line-height: 1.3;
+        letter-spacing: .18em;
+        text-transform: uppercase;
+        font-weight: 650;
+      }
+      h1, h2, p { margin-top: 0; }
+      h1 {
+        margin-bottom: 15px;
+        font-size: clamp(64px, 8vw, 124px);
+        line-height: .86;
+        letter-spacing: -.085em;
+        font-weight: 560;
+      }
+      h1 span { display: block; }
+      h1 em {
+        color: #6c7274;
+        font-style: normal;
+        font-weight: 430;
+      }
+      h2 {
+        margin-bottom: 16px;
+        max-width: 510px;
+        font-size: clamp(38px, 4.45vw, 68px);
+        line-height: .98;
+        letter-spacing: -.065em;
+        font-weight: 510;
+      }
+      .lede {
+        max-width: 345px;
+        margin-bottom: 0;
+        color: #555b5b;
+        font-size: clamp(16px, 1.34vw, 19px);
+        line-height: 1.48;
+        letter-spacing: -.025em;
+      }
+      .body-copy {
+        max-width: 350px;
+        margin: 0;
+        color: #646969;
+        font-size: 15px;
+        line-height: 1.6;
+        letter-spacing: -.012em;
+      }
+      .small-note {
+        display: block;
+        max-width: 360px;
+        margin-top: 18px;
+        color: #7c8181;
+        font-size: 11px;
+        line-height: 1.5;
+      }
+      .hero-meta {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        margin-top: 31px;
+        color: #666b6b;
+        font-size: 10px;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+      }
+      .hero-meta::before {
+        content: "";
+        width: 31px;
+        height: 1px;
+        background: #8d9393;
+      }
+      .color-picker {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 28px;
+      }
+      .swatch {
+        position: relative;
+        width: 35px;
+        height: 35px;
+        padding: 0;
+        border: 1px solid rgba(20,24,24,.13);
+        border-radius: 50%;
+        cursor: pointer;
+        background: var(--swatch);
+        box-shadow: inset 0 1px 2px rgba(0,0,0,.08);
+        transition: transform .2s ease, box-shadow .2s ease;
+      }
+      .swatch:hover { transform: translateY(-2px); }
+      .swatch[aria-pressed="true"] {
+        box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px #333b3c, inset 0 1px 2px rgba(0,0,0,.08);
+      }
+      .swatch-label {
+        min-height: 18px;
+        margin-top: 12px;
+        color: #676d6d;
+        font-size: 11px;
+        letter-spacing: .03em;
+      }
+      .control-note {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 27px;
+        color: #777c7c;
+        font-size: 10px;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+      }
+      .control-note span {
+        display: inline-block;
+        width: 28px;
+        height: 1px;
+        background: #909595;
+      }
+      .measure {
+        display: flex;
+        gap: 25px;
+        margin-top: 27px;
+        padding-top: 16px;
+        border-top: 1px solid var(--hairline);
+      }
+      .measure div { display: grid; gap: 5px; }
+      .measure strong {
+        font-size: 15px;
+        letter-spacing: -.035em;
+        font-weight: 560;
+      }
+      .measure span {
+        color: #777c7c;
+        font-size: 9px;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+      }
+      .chapter-index {
+        position: absolute;
+        left: var(--edge);
+        bottom: 37px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #818686;
+        font-size: 9px;
+        letter-spacing: .15em;
+        text-transform: uppercase;
+      }
+      .chapter-index b { color: #3a4040; font-weight: 640; }
+      .chapter-index::before {
+        content: "";
+        display: block;
+        width: 22px;
+        height: 1px;
+        background: #9da2a2;
+      }
+      .progress {
+        position: fixed;
+        z-index: 19;
+        left: var(--edge);
+        bottom: 19px;
+        width: min(210px, 26vw);
+        height: 1px;
+        background: rgba(39,44,44,.15);
+      }
+      .progress span {
+        display: block;
+        width: 0;
+        height: 1px;
+        background: #353a3a;
+        transition: width .1s linear;
+      }
+      .scroll-hint {
+        position: fixed;
+        z-index: 18;
+        right: var(--edge);
+        bottom: 22px;
+        color: #727777;
+        font-size: 9px;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+        opacity: .84;
+      }
+      .source-note {
+        position: relative;
+        z-index: 5;
+        min-height: 100svh;
+        padding: 70px var(--edge) 40px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        color: #6e7474;
+        font-size: 10px;
+        line-height: 1.6;
+      }
+      .source-note p { max-width: 360px; margin-bottom: 0; }
+      .source-note a { text-underline-offset: 3px; }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0,0,0,0);
+        white-space: nowrap;
+        border: 0;
+      }
+      @media (max-width: 760px) {
+        :root { --edge: 24px; --canvas-width: 100vw; }
+        .masthead { height: 64px; }
+        .edition { display: none; }
+        .nav-meta { gap: 0; }
+        .nav-meta a { display: none; }
+        .nav-meta::after {
+          content: "INTERACTIVE STUDY";
+          font-size: 9px;
+          letter-spacing: .12em;
+        }
+        .scene-panel { height: 63svh; }
+        .fallback-image { inset: 4% 4% auto; width: 92%; max-height: 52%; }
+        .chapter {
+          align-items: flex-start;
+          padding: 0 var(--edge) 64px;
+        }
+        .copy {
+          width: min(100%, 440px);
+          margin: 63svh 0 0;
+          padding: 20px 0 0;
+          opacity: .2;
+        }
+        .chapter[data-chapter="1"] .copy { margin-top: 58svh; }
+        h1 { font-size: clamp(58px, 17vw, 86px); }
+        h2 { font-size: clamp(37px, 11vw, 53px); }
+        .lede { font-size: 16px; }
+        .body-copy { font-size: 14px; }
+        .chapter-index { bottom: 25px; }
+        .progress { bottom: 12px; width: 105px; }
+        .scroll-hint { bottom: 14px; right: 24px; font-size: 8px; }
+        .callout { width: 156px; padding: 10px 11px; }
+        .callout.crown { right: 3%; top: 18%; }
+        .callout.mode { right: 3%; top: 37%; }
+        .callout.chip { left: 3%; top: 17%; }
+        .callout.driver { left: 3%; top: 35%; }
+        .callout.cushion { left: 3%; top: 53%; }
+        .source-note {
+          min-height: 100svh;
+          padding: 0 var(--edge) 38px;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-end;
+          gap: 20px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          scroll-behavior: auto !important;
+          transition-duration: .01ms !important;
+          animation-duration: .01ms !important;
+        }
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.181.0/build/three.module.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <header class="masthead">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">A/M</span><span>OBJECT STUDY</span></div>
+      <span class="edition">A study in listening · 01 / 07</span>
+      <nav class="nav-meta" aria-label="Page navigation">
+        <a href="#chapter-2">Finishes</a>
+        <a href="#chapter-6">Inside</a>
+        <a href="#chapter-7">Smart Case</a>
+      </nav>
+    </header>
+
+    <div class="scene-panel" id="scene-panel" aria-label="Interactive AirPods Max 3D product model">
+      <canvas id="product-view" aria-hidden="true"></canvas>
+      <img class="fallback-image" src="./assets/front-silhouette.webp" alt="AirPods Max in silver, front view" />
+      <svg class="leader-svg" id="leader-svg" aria-hidden="true"></svg>
+      <div class="callout crown" data-callout="crown">
+        <span class="kicker">Digital Crown</span>
+        <strong>Precision, by touch.</strong>
+        <p>Turn for volume. Press to play, skip tracks, answer calls, or reach Siri.</p>
+      </div>
+      <div class="callout mode" data-callout="mode">
+        <span class="kicker">Listening mode</span>
+        <strong>Control the outside in.</strong>
+        <p>A press switches between Active Noise Cancellation and Transparency.</p>
+      </div>
+      <div class="callout chip" data-callout="chip">
+        <span class="kicker">H1 · each cup</span>
+        <strong>Computational audio.</strong>
+        <p>Two Apple-designed H1 chips power the original AirPods Max listening system.</p>
+      </div>
+      <div class="callout driver" data-callout="driver">
+        <span class="kicker">40 mm driver</span>
+        <strong>One custom acoustic engine.</strong>
+        <p>A dual neodymium ring magnet motor drives the Apple-designed dynamic speaker.</p>
+      </div>
+      <div class="callout cushion" data-callout="cushion">
+        <span class="kicker">Magnetic cushion</span>
+        <strong>Soft, sealed, removable.</strong>
+        <p>Acoustically engineered memory foam is wrapped in a knitted textile.</p>
+      </div>
+    </div>
+
+    <div class="progress" aria-hidden="true"><span id="progress-fill"></span></div>
+    <div class="scroll-hint" aria-hidden="true">Scroll to explore</div>
+
+    <main>
+      <section class="chapter" id="chapter-1" data-chapter="1" style="--duration:120">
+        <div class="copy">
+          <p class="eyebrow">AirPods Max · first generation</p>
+          <h1><span>AirPods</span><em>Max.</em></h1>
+          <p class="lede">A study in shape, sound, and the small details that make a listening object feel unmistakably considered.</p>
+          <div class="hero-meta">An interactive object study</div>
+        </div>
+        <div class="chapter-index"><b>01</b> Sculpture</div>
+      </section>
+
+      <section class="chapter" id="chapter-2" data-chapter="2" style="--duration:140">
+        <div class="copy">
+          <p class="eyebrow">01 / Surface & finish</p>
+          <h2>Five finishes.<br />One silhouette.</h2>
+          <p class="body-copy">Anodized aluminum, a breathable knit canopy, and soft-touch cushions shift together across the original palette.</p>
+          <div class="color-picker" role="group" aria-label="Choose an AirPods Max color">
+            <button class="swatch" type="button" style="--swatch:#c6c8c8" data-color="0" aria-label="Silver" aria-pressed="true"></button>
+            <button class="swatch" type="button" style="--swatch:#454950" data-color="1" aria-label="Space Gray" aria-pressed="false"></button>
+            <button class="swatch" type="button" style="--swatch:#6489a8" data-color="2" aria-label="Sky Blue" aria-pressed="false"></button>
+            <button class="swatch" type="button" style="--swatch:#d88794" data-color="3" aria-label="Pink" aria-pressed="false"></button>
+            <button class="swatch" type="button" style="--swatch:#769b85" data-color="4" aria-label="Green" aria-pressed="false"></button>
+          </div>
+          <div class="swatch-label" id="swatch-label" aria-live="polite">Silver</div>
+        </div>
+        <div class="chapter-index"><b>02</b> Finish</div>
+      </section>
+
+      <section class="chapter" id="chapter-3" data-chapter="3" style="--duration:180">
+        <div class="copy">
+          <p class="eyebrow">02 / A familiar gesture</p>
+          <h2>A crown,<br />with purpose.</h2>
+          <p class="body-copy">A tactile, knurled dial sits beside the listening-mode button. A single hand can move from volume to music, calls, and Siri.</p>
+          <div class="control-note"><span></span>Focus: controls &amp; machining</div>
+        </div>
+        <div class="chapter-index"><b>03</b> Controls</div>
+      </section>
+
+      <section class="chapter" id="chapter-4" data-chapter="4" style="--duration:140">
+        <div class="copy">
+          <p class="eyebrow">03 / Knit &amp; memory foam</p>
+          <h2>Comfort is<br />engineered in.</h2>
+          <p class="body-copy">A breathable canopy spans the stainless-steel frame. Inside each cup, memory foam and woven mesh create a soft acoustic seal around the ear.</p>
+          <div class="control-note"><span></span>Focus: textile &amp; fit</div>
+        </div>
+        <div class="chapter-index"><b>04</b> Materials</div>
+      </section>
+
+      <section class="chapter" id="chapter-5" data-chapter="5" style="--duration:140">
+        <div class="copy">
+          <p class="eyebrow">04 / Magnetic attachment</p>
+          <h2>Off in a<br />quiet second.</h2>
+          <p class="body-copy">The cushions lift away to reveal the inner acoustic mesh, ear marking, fasteners, and perforated housing—then settle back into place.</p>
+          <div class="control-note"><span></span>Focus: remove &amp; return</div>
+        </div>
+        <div class="chapter-index"><b>05</b> Detach</div>
+      </section>
+
+      <section class="chapter" id="chapter-6" data-chapter="6" style="--duration:160">
+        <div class="copy">
+          <p class="eyebrow">05 / Inside the cup</p>
+          <h2>Every layer,<br />in concert.</h2>
+          <p class="body-copy">The original AirPods Max pair an Apple-designed 40 mm dynamic driver with a dual neodymium ring magnet motor and an H1 chip in each ear cup.</p>
+          <span class="small-note">Illustrative procedural reconstruction based on the supplied reference frames and Apple’s published hardware description; component geometry is not service documentation.</span>
+          <div class="measure">
+            <div><strong>40 mm</strong><span>Dynamic driver</span></div>
+            <div><strong>2 × H1</strong><span>One in each cup</span></div>
+          </div>
+        </div>
+        <div class="chapter-index"><b>06</b> Engineering</div>
+      </section>
+
+      <section class="chapter" id="chapter-7" data-chapter="7" style="--duration:120">
+        <div class="copy">
+          <p class="eyebrow">06 / Smart Case</p>
+          <h2>Ready for<br />the next listen.</h2>
+          <p class="body-copy">The soft, slim Smart Case folds around the ear cups. Placing AirPods Max inside puts them into an ultralow-power state.</p>
+          <div class="measure">
+            <div><strong>187.3 mm</strong><span>Height</span></div>
+            <div><strong>386.2 g</strong><span>USB-C model</span></div>
+          </div>
+        </div>
+        <div class="chapter-index"><b>07</b> The case</div>
+      </section>
+      <section class="source-note" aria-label="Sources and credits">
+        <p>Independent interactive study. AirPods Max is a trademark of Apple Inc. Product facts and original palette are based on Apple’s <a href="https://www.apple.com/in/newsroom/2020/12/apple-introduces-airpods-max-the-magic-of-airpods-in-a-stunning-over-ear-design/" target="_blank" rel="noreferrer">published hardware description</a> and <a href="https://support.apple.com/en-in/121205" target="_blank" rel="noreferrer">USB-C technical specifications</a>.</p>
+        <p>Procedural 3D model · no product model or 3D embed loaded</p>
+      </section>
+    </main>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
