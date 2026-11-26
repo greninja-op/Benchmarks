@@ -2,6 +2,36 @@
 
 A seven-chapter, scroll-driven showcase of the original 2020 AirPods Max. The live page uses one hierarchical Three.js model, custom parametric cup surfaces, procedural material maps, a PMREM studio environment, and projected hardware annotations. The site is a static Vite build and has no external 3D assets or runtimes.
 
+## Showcase gallery
+
+### Overview
+
+![Sky Blue AirPods Max from the front at a three-quarter angle](public/stills/hero.webp)
+
+### Finishes
+
+![An angled view of the Sky Blue aluminum cups and matching canopy](public/stills/finishes.webp)
+
+### Precision controls
+
+![Close-up of the Digital Crown and Noise Control button](public/stills/controls.webp)
+
+### Knit mesh and cushions
+
+![Close-up of the woven ear cushion and inner lining](public/stills/textiles.webp)
+
+### Magnetic cushion removal
+
+![Detached cushions beside the exposed acoustic housings](public/stills/cushions.webp)
+
+### Exploded ear cup
+
+![The ear cup shell, electronics, driver, baffle, and cushion separated into layers](public/stills/engineering.webp)
+
+### Smart Case
+
+![AirPods Max seated in the closed Sky Blue Smart Case](public/stills/case.webp)
+
 ## Run locally
 
 ```sh
