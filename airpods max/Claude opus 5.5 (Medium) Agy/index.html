@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>AirPods Max — Computational audio, sculpted.</title>
+  <meta name="description" content="An interactive, scroll-driven 3D showcase of AirPods Max, built entirely in code with Three.js." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Ccircle cx=%228%22 cy=%228%22 r=%227%22 fill=%22%231d1d1f%22/%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Ccircle cx=%228%22 cy=%228%22 r=%227%22 fill=%22%231d1d1f%22/%3E%3C/svg%3E" />`n  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="backdrop"></div>
+  <div class="backdrop backdrop--lab"></div>
+  <canvas id="gl" aria-label="Interactive 3D AirPods Max"></canvas>
+  <svg id="leaders" aria-hidden="true"></svg>
+  <div id="callouts"></div>
+
+  <header class="nav glass">
+    <a class="nav__brand" href="#" data-goto="0">AirPods Max</a>
+    <span class="nav__stage" data-stage-label>Design</span>
+    <a class="nav__buy" href="#" data-goto="0.999">Buy</a>
+    <span class="nav__progress"><i></i></span>
+  </header>
+
+  <nav class="rail" aria-label="Sections"></nav>
+
+  <div class="swatches glass">
+    <span class="swatches__name" data-color-name>Silver</span>
+    <div class="swatches__row"></div>
+  </div>
+
+  <!-- Stage 1 -->
+  <section class="panel panel--hero" data-in="-1" data-out="0.105">
+    <div class="reveal"><p class="eyebrow">Introducing</p></div>
+    <div class="reveal"><h1 class="display">AirPods Max</h1></div>
+    <div class="reveal"><p class="lede">High-fidelity audio. Computationally tuned. Sculpted in aluminum.</p></div>
+  </section>
+  <div class="scroll-hint"><span></span>Scroll to explore</div>
+
+  <!-- Stage 2 -->
+  <section class="panel panel--left" data-in="0.115" data-out="0.265">
+    <div class="reveal"><p class="eyebrow">Five finishes</p></div>
+    <div class="reveal"><h2 class="title">Color, in every<br />dimension.</h2></div>
+    <div class="reveal"><p class="body">Anodized aluminum, knit-mesh canopy and memory-foam cushions — each finish color-matched down to the Smart Case.</p></div>
+    <div class="reveal"><p class="big-color" data-color-name>Silver</p></div>
+  </section>
+
+  <!-- Stage 3 -->
+  <section class="panel panel--left" data-in="0.275" data-out="0.445">
+    <div class="reveal"><p class="eyebrow">Precision controls</p></div>
+    <div class="reveal"><h2 class="title">The Digital Crown.<br />Reimagined.</h2></div>
+    <div class="reveal"><p class="body">Inspired by Apple Watch, a knurled aluminum dial gives precise volume control, playback and Siri — with a dedicated Noise Control button beside it.</p></div>
+  </section>
+
+  <!-- Stage 4 -->
+  <section class="panel panel--right" data-in="0.448" data-out="0.588">
+    <div class="reveal"><p class="eyebrow">Comfort</p></div>
+    <div class="reveal"><h2 class="title">Designed for<br />zero pressure.</h2></div>
+    <div class="reveal"><p class="body">A breathable knit-mesh canopy distributes weight, while acoustic memory foam and a custom-woven inner mesh create an effective, gentle seal.</p></div>
+  </section>
+
+  <!-- Stage 5 -->
+  <section class="panel panel--top" data-in="0.592" data-out="0.722">
+    <div class="reveal"><p class="eyebrow">Magnetic ear cushions</p></div>
+    <div class="reveal"><h2 class="title">Detach. Snap. Done.</h2></div>
+    <div class="reveal"><p class="body">Cushions lift away to reveal the perforated acoustic housing — then magnetically snap back, perfectly aligned.</p></div>
+  </section>
+
+  <!-- Stage 6 -->
+  <section class="panel panel--topleft" data-in="0.728" data-out="0.882">
+    <div class="reveal"><p class="eyebrow">Engineering</p></div>
+    <div class="reveal"><h2 class="title">Every layer,<br />acoustically tuned.</h2></div>
+    <div class="reveal"><p class="body">From the aluminum shell to the H1 chip, the 40 mm driver and memory foam — engineered as one acoustic system.</p></div>
+  </section>
+
+  <!-- Stage 7 -->
+  <section class="panel panel--finale" data-in="0.9" data-out="1.5">
+    <div class="finale__copy">
+      <div class="reveal"><p class="eyebrow">Smart Case</p></div>
+      <div class="reveal"><h2 class="title">Sleeps soundly.<br />Wakes instantly.</h2></div>
+    </div>
+    <ul class="specs">
+      <li class="reveal"><div><b>20 hrs</b><span>Listening time with ANC</span></div></li>
+      <li class="reveal"><div><b>H1 × 2</b><span>Ten audio cores per ear cup</span></div></li>
+      <li class="reveal"><div><b>9 mics</b><span>Computational audio array</span></div></li>
+      <li class="reveal"><div><b>40 mm</b><span>Apple-designed dynamic driver</span></div></li>
+    </ul>
+    <div class="reveal cta-row"><div><a class="btn btn--primary" href="#">Buy — $549</a><a class="btn btn--ghost" href="#" data-goto="0">Replay</a></div></div>
+  </section>
+
+  <div id="scroll" style="height: 1500vh"></div>
+
+  <div class="loader"><div><span>AirPods Max</span><i></i></div></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

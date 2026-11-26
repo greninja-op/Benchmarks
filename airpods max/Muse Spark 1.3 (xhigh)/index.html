@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>AirPods Max — Interactive Showcase</title>
+<meta name="description" content="Photorealistic, scroll-driven 3D showcase of Apple AirPods Max. Built entirely in code with Three.js — zero external 3D embeds.">
+<link rel="stylesheet" href="css/style.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div id="scene" aria-hidden="true"></div>
+
+<header class="hud hud--top" aria-hidden="true">
+  <span class="badge badge--dot">AirPods Max</span>
+  <span class="badge badge--ghost">Overview</span>
+  <span class="badge badge--ghost">Design</span>
+  <span class="badge badge--ghost">Audio</span>
+  <span class="badge badge--ghost">Smart Case</span>
+</header>
+
+<nav id="progress" aria-label="Sections">
+  <button class="dot" type="button" aria-label="Go to section 1"></button>
+  <button class="dot" type="button" aria-label="Go to section 2"></button>
+  <button class="dot" type="button" aria-label="Go to section 3"></button>
+  <button class="dot" type="button" aria-label="Go to section 4"></button>
+  <button class="dot" type="button" aria-label="Go to section 5"></button>
+  <button class="dot" type="button" aria-label="Go to section 6"></button>
+  <button class="dot" type="button" aria-label="Go to section 7"></button>
+</nav>
+
+<div class="scroll-hint" aria-hidden="true">
+  <span>Scroll</span>
+  <span class="scroll-hint__line"></span>
+</div>
+
+<main id="scroll">
+  <section class="stage" id="s1">
+    <div class="stage-copy">
+      <p class="eyebrow reveal">AirPods Max</p>
+      <h1 class="display reveal">Sound<br>beyond<br><em>everything.</em></h1>
+      <p class="lede reveal">A breathable knit-mesh canopy. Anodized aluminum
+      cups. Custom-built 40&nbsp;mm drivers. Scroll to explore — every
+      detail below is rendered live in your browser.</p>
+      <p class="micro reveal">Rendered in real time · Zero external 3D</p>
+    </div>
+  </section>
+
+  <section class="stage" id="s2">
+    <div class="stage-copy">
+      <p class="eyebrow reveal">Colour</p>
+      <h2 class="display reveal">Five finishes.<br>One <em>silhouette.</em></h2>
+      <p class="lede reveal">Silver, Space Gray, Sky Blue, Pink and Green —
+      the anodized aluminum, canopy knit, cushions and Smart Case
+      all morph in real time.</p>
+    </div>
+  </section>
+
+  <section class="stage" id="s3">
+    <div class="stage-copy stage-copy--right">
+      <p class="eyebrow reveal">Controls</p>
+      <h2 class="display reveal">Digital Crown.<br>Noise <em>Control.</em></h2>
+      <p class="lede reveal">Rotate the crown for volume and track navigation.
+      Press for Siri. The pill button switches between Active Noise
+      Cancellation and Transparency.</p>
+    </div>
+  </section>
+
+  <section class="stage" id="s4">
+    <div class="stage-copy">
+      <p class="eyebrow reveal">Comfort</p>
+      <h2 class="display reveal">Breathable knit<br><em>canopy.</em></h2>
+      <p class="lede reveal">A woven mesh distributes weight across your head.
+      Memory-foam cushions with woven acoustic mesh keep pressure low —
+      for spatially natural sound, day after day.</p>
+    </div>
+  </section>
+
+  <section class="stage" id="s5">
+    <div class="stage-copy stage-copy--right">
+      <p class="eyebrow reveal">Magnetic cushions</p>
+      <h2 class="display reveal">Snap. Swap.<br><em>Seal.</em></h2>
+      <p class="lede reveal">Cushions seat magnetically against the acoustic
+      baffle. Lift them off, clean them, snap them back — a satisfying
+      mechanical closure every time.</p>
+    </div>
+  </section>
+
+  <section class="stage" id="s6">
+    <div class="stage-copy">
+      <p class="eyebrow reveal">Engineering</p>
+      <h2 class="display reveal">Exploded,<br>on <em>purpose.</em></h2>
+      <p class="lede reveal">Outer anodized shell, H1 chip and sensor assembly,
+      40&nbsp;mm dual-neodymium driver, acoustic baffle and knit cushion —
+      each layer engineered, each layer visible.</p>
+    </div>
+  </section>
+
+  <section class="stage" id="s7">
+    <div class="stage-copy stage-copy--center">
+      <p class="eyebrow reveal">Smart Case</p>
+      <h2 class="display reveal">Folds flat.<br>Wakes <em>instantly.</em></h2>
+      <p class="lede reveal">Ear cups swivel into the soft-touch case.
+      The magnetic flap draws them into low power — and pops them back
+      awake the moment you lift them out.</p>
+      <div class="cta-row reveal">
+        <button class="cta" id="cta" type="button">Explore AirPods Max</button>
+      </div>
+      <p class="micro reveal">40 mm driver · H1 chip · 20 h ANC · 384 g</p>
+    </div>
+  </section>
+</main>
+
+<svg id="leaders" aria-hidden="true"></svg>
+<div id="callouts" aria-hidden="true"></div>
+
+<div id="swatches" role="group" aria-label="Choose finish">
+  <span class="swatch-label">Silver</span>
+  <button type="button" data-color="silver" aria-label="Silver"></button>
+  <button type="button" data-color="space-gray" aria-label="Space Gray"></button>
+  <button type="button" data-color="sky-blue" aria-label="Sky Blue"></button>
+  <button type="button" data-color="pink" aria-label="Pink"></button>
+  <button type="button" data-color="green" aria-label="Green"></button>
+</div>
+
+<footer class="foot">AirPods Max interactive showcase · Procedural PBR model, no 3D embeds ·
+Reference-grounded industrial design.</footer>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

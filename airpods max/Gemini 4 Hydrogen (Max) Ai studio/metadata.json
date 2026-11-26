@@ -1,0 +1,8 @@
+{
+  "name": "AirPods Max — Spatial Acoustic Showcase",
+  "description": "Interactive scroll-driven 3D WebGL product showcase of Apple AirPods Max featuring real-time PBR colorway morphing, macro Digital Crown controls, magnetic cushion detachment, horizontal exploded engineering view, and Smart Case choreography.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

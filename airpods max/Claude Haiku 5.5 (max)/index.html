@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="AirPods Max, rendered in code and driven by scroll." />
+    <link rel="icon" href="data:," />
+    <title>AirPods Max, in motion</title>
+  </head>
+  <body>
+    <canvas id="stage" aria-hidden="true"></canvas>
+    <svg id="leaders" class="leaders" aria-hidden="true"></svg>
+    <div id="loader" class="loader"><span>Preparing studio</span></div>
+
+    <header class="topbar">
+      <span class="brand">AirPods Max</span>
+      <span class="topbar-note">Scroll to explore</span>
+    </header>
+
+    <main class="chapters">
+      <section class="chapter chapter--center" data-stage="hero">
+        <p class="kicker" data-reveal>Over-ear headphones</p>
+        <h1 data-reveal>AirPods Max</h1>
+        <p class="lede" data-reveal>Active Noise Cancellation, a knit canopy and memory-foam cushions, shown one part at a time.</p>
+      </section>
+
+      <section class="chapter chapter--left" data-stage="finish">
+        <p class="kicker" data-reveal>Finish</p>
+        <h2 data-reveal>Five finishes.</h2>
+        <p class="lede" data-reveal>Silver, Space Gray, Sky Blue, Pink and Green. The cups, canopy, cushions and case change color together.</p>
+      </section>
+
+      <section class="chapter chapter--left" data-stage="controls">
+        <p class="kicker" data-reveal>Controls</p>
+        <h2 data-reveal>Two controls on the right cup.</h2>
+        <p class="lede" data-reveal>The Digital Crown and the Noise Control button sit on the outer edge of the right ear cup.</p>
+      </section>
+
+      <section class="chapter chapter--right" data-stage="canopy">
+        <p class="kicker" data-reveal>Comfort</p>
+        <h2 data-reveal>Knit canopy, knit cushions.</h2>
+        <p class="lede" data-reveal>A breathable canopy spreads the weight across the top of your head. Each cushion is knit over memory foam, and the inside of each cup is marked L or R.</p>
+      </section>
+
+      <section class="chapter chapter--right" data-stage="cushions">
+        <p class="kicker" data-reveal>Magnetic cushions</p>
+        <h2 data-reveal>They lift off and snap back.</h2>
+        <p class="lede" data-reveal>Each cushion attaches with magnets. Lift one away to see the perforated driver housing and the magnet ring, then press it home.</p>
+      </section>
+
+      <section class="chapter chapter--left chapter--high" data-stage="explode">
+        <p class="kicker" data-reveal>Engineering</p>
+        <h2 data-reveal>Layer by layer.</h2>
+        <p class="lede" data-reveal>Anodized shell, H1 chip and sensors, a 40 mm driver with a ring magnet, the acoustic baffle, and the knit cushion.</p>
+      </section>
+
+      <section class="chapter chapter--center chapter--final" data-stage="case">
+        <p class="kicker" data-reveal>Smart Case</p>
+        <h2 data-reveal>Closed, ready to carry.</h2>
+        <ul class="specs" data-reveal>
+          <li><span>Listening time</span><strong>Up to 20 hours with ANC on</strong></li>
+          <li><span>Height and width</span><strong>187 mm and 169 mm</strong></li>
+          <li><span>Weight</span><strong>386 g</strong></li>
+        </ul>
+        <div class="cta" data-reveal>
+          <a class="btn btn-primary" href="https://www.apple.com/airpods-max/specs/" target="_blank" rel="noopener">Full specifications</a>
+          <button class="btn btn-ghost" type="button" data-replay>Replay</button>
+        </div>
+        <p class="fine" data-reveal>Figures from Apple's AirPods Max specifications page. The model on this page is built in code and approximates the product.</p>
+      </section>
+    </main>
+
+    <div class="callout callout--crown" data-callout="crown">
+      <h3>Digital Crown</h3>
+      <p>Turn for volume. Press once to play or pause, twice to skip forward, three times to skip back. Press and hold for Siri.</p>
+    </div>
+    <div class="callout callout--noise" data-callout="noise">
+      <h3>Noise Control</h3>
+      <p>Press to switch between Active Noise Cancellation and Transparency mode.</p>
+    </div>
+    <div class="callout callout--layer-a" data-callout="shell">
+      <h3>Anodized aluminum shell</h3>
+    </div>
+    <div class="callout callout--layer-b" data-callout="electronics">
+      <h3>H1 chip and sensors</h3>
+    </div>
+    <div class="callout callout--layer-c" data-callout="driver">
+      <h3>40 mm driver</h3>
+      <p>Dual neodymium ring magnet</p>
+    </div>
+    <div class="callout callout--layer-d" data-callout="cushion">
+      <h3>Knit cushion</h3>
+      <p>Memory foam, magnetic attachment</p>
+    </div>
+
+    <nav class="swatches" aria-label="Finish">
+      <div class="swatches-row">
+        <button type="button" data-swatch="0"><i></i></button>
+        <button type="button" data-swatch="1"><i></i></button>
+        <button type="button" data-swatch="2"><i></i></button>
+        <button type="button" data-swatch="3"><i></i></button>
+        <button type="button" data-swatch="4"><i></i></button>
+      </div>
+      <span class="swatch-name" data-swatch-name>Silver</span>
+    </nav>
+
+    <div class="progress" aria-hidden="true"><span></span></div>
+    <div id="scroll" class="scroll-space" aria-hidden="true"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

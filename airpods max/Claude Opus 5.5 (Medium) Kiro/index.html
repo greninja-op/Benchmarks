@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AirPods Max</title>
+  <meta name="description" content="AirPods Max. An interactive, scroll-driven product showcase rendered in real time." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+</head>
+<body>
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <div id="loader"><span></span></div>
+
+  <header class="nav glass">
+    <span class="brand">AirPods Max</span>
+    <nav class="nav-links"><a href="#">Overview</a><a href="#">Tech Specs</a></nav>
+    <a class="pill-btn small" href="#">Buy</a>
+  </header>
+
+  <svg id="leaders" aria-hidden="true"></svg>
+  <div id="callouts"></div>
+
+  <main class="panels">
+    <section class="panel hero" data-range="-5,10.5">
+      <p class="eyebrow reveal"><span>Introducing</span></p>
+      <h1 class="reveal"><span>AirPods Max</span></h1>
+      <p class="lede reveal"><span>High-fidelity audio. Sculpted in aluminum.</span></p>
+    </section>
+    <div class="panel scroll-hint" data-range="-5,4"><span>Scroll</span><i></i></div>
+
+    <section class="panel side right" data-range="13,26">
+      <p class="eyebrow">Colors</p>
+      <h2>Five finishes.<br />One unmistakable form.</h2>
+      <p class="body">Anodized aluminum cups, a breathable knit-mesh canopy, and color-matched cushions. Now showing <b data-color-name>Silver</b>.</p>
+    </section>
+
+    <section class="panel side left bottom" data-range="27,33.5">
+      <p class="eyebrow">Controls</p>
+      <h2>Precision you can feel.</h2>
+      <p class="body">The Digital Crown, inspired by Apple Watch, gives you fine control over volume and playback.</p>
+    </section>
+
+    <section class="panel side left" data-range="45,57.5">
+      <p class="eyebrow">Comfort</p>
+      <h2>Designed for zero&#8209;pressure fit.</h2>
+      <p class="body">A knit-mesh canopy spans the headband to distribute weight. Stainless steel arms telescope smoothly. Memory-foam cushions are wrapped in an acoustically engineered knit, with a woven <b>L</b> and <b>R</b> inside each cup.</p>
+    </section>
+
+    <section class="panel side right bottom" data-range="59.5,71">
+      <p class="eyebrow">Ear cushions</p>
+      <h2>Magnetic. Effortless.</h2>
+      <p class="body">Cushions lift away to reveal the perforated acoustic housing, then snap back into place with magnets.</p>
+    </section>
+
+    <section class="panel center top on-dark" data-range="73,79.6">
+      <p class="eyebrow">Engineering</p>
+      <h2>Engineered from the inside out.</h2>
+    </section>
+
+    <section class="panel center top" data-range="91.5,106">
+      <p class="eyebrow">Smart Case</p>
+      <h2>Put it to sleep.</h2>
+      <p class="body">The Smart Case puts AirPods Max into an ultralow-power state to preserve battery.</p>
+    </section>
+    <section class="panel specs" data-range="95,106">
+      <dl>
+        <div><dt>20 h</dt><dd>listening with ANC on</dd></div>
+        <div><dt>H1</dt><dd>in each ear cup</dd></div>
+        <div><dt>9</dt><dd>microphones</dd></div>
+        <div><dt>384.8 g</dt><dd>168.6 × 187.3 × 83.4 mm</dd></div>
+      </dl>
+      <div class="cta"><a class="pill-btn" href="#">Buy</a><a class="link" href="#">Learn more ›</a></div>
+    </section>
+  </main>
+
+  <div id="swatches" class="glass hidden">
+    <div class="swatch-row"></div>
+    <span id="swatch-name">Silver</span>
+  </div>
+  <nav id="stages" aria-label="Sections"></nav>
+
+  <div id="track"></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
