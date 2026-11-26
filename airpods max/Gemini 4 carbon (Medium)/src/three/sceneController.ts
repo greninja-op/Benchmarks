@@ -491,7 +491,7 @@ export class AirPodsSceneController {
       this.model.rightCup.electronicsLayer.position.z = 0.09 - explodeAmount * 0.24;
     }
     this.model.rightCup.driverLayer.visible = explodeAmount > 0.004 || detachAmount > 0.02;
-    this.model.rightCup.driverLayer.position.z = 0.045 - explodeAmount * 0.80;
+    this.model.rightCup.driverLayer.position.z = 0.072 - explodeAmount * 0.80;
     this.model.rightCup.baffleLayer.position.z = -explodeAmount * 1.38;
 
     this.model.rightCup.cushionLayer.position.set(

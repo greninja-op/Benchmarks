@@ -563,7 +563,7 @@ export function createAirPodsMaxAssembly(): AirPodsMaxAssembly {
     // Reference: 4.22.11 PM (1).jpeg Layer 3
     // ---------------------------------------------------------
     const driverLayer = new THREE.Group();
-    driverLayer.position.set(0, -0.04, 0.045);
+    driverLayer.position.set(0, -0.04, 0.072);
     cupBody.add(driverLayer);
 
     // Outer circular 40mm driver frame flange (angled slightly for ear ergonomics)
