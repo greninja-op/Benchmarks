@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f2f5fa">
+<meta name="description" content="An interactive 3D design study of the original Apple AirPods Max. Explore five finishes, the controls, and the engineering inside.">
+<title>AirPods Max — Interactive Design Study</title>
+</head>
+<body>
+<header class="header">
+  <a class="wordmark" href="#overview" data-stage="0">AirPods Max</a>
+  <nav aria-label="Product chapters">
+    <a href="#overview" data-stage="0">Overview</a><a href="#finishes" data-stage="1">Finishes</a><a href="#engineering" data-stage="5">Engineering</a><a href="#smart-case" data-stage="6">Smart Case</a>
+  </nav>
+  <a class="spec-link" href="https://support.apple.com/en-in/111858" target="_blank" rel="noopener">Tech specs</a>
+</header>
+<main id="experience">
+  <div class="sticky">
+    <div class="studio"></div>
+    <div class="stage-heading">
+      <p class="eyebrow"><span></span><span id="kicker">THE ORIGINAL OVER-EAR DESIGN</span></p>
+      <h1 id="title">AirPods Max</h1>
+    </div>
+    <div id="viewport" aria-hidden="true"></div>
+    <div id="fallback" hidden>
+      <img src="/stills/hero.webp" width="1000" height="784" alt="Sky Blue AirPods Max viewed from the front at an angle" fetchpriority="high">
+      <span>Still preview · Live 3D requires WebGL 2</span>
+    </div>
+    <svg id="leaders" aria-hidden="true"></svg>
+    <div id="annotations" aria-live="off"></div>
+    <aside class="caption">
+      <p id="caption-title">Sound, shaped.</p>
+      <p id="caption-body">A closer look at the materials, controls, and acoustics of the original AirPods Max.</p>
+      <a id="final-link" class="spec-link" href="https://support.apple.com/en-in/111858" target="_blank" rel="noopener" hidden>View technical specifications</a>
+    </aside>
+    <div class="finish">
+      <output id="finish-name">Sky Blue</output>
+      <div id="swatches" aria-label="Select a finish"></div>
+    </div>
+    <div class="bottom">
+      <div class="counter"><b id="chapter">01</b><span></span>07</div>
+      <nav id="chapters" aria-label="All seven chapters"></nav>
+      <button type="button" id="advance">Scroll to explore <svg width="12" height="14" viewBox="0 0 12 14" aria-hidden="true"><path d="M6 1v10m-4-4 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.35"/></svg></button>
+    </div>
+  </div>
+  <div id="scroll-track" aria-hidden="true"></div>
+</main>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
