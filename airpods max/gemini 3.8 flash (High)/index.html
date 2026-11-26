@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AirPods Max — Apple</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 170 170'><path fill='%23000000' d='M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.69-3.04-7.69-7.85-12-14.42-6.19-9.44-11.04-20.47-14.54-33.09-3.5-12.62-5.25-24.47-5.25-35.54 0-14.9 3.69-27.18 11.07-36.83 7.37-9.65 16.71-14.61 28.01-14.89 4.8 0 10.12 1.25 15.96 3.76 5.84 2.5 9.4 3.82 10.68 3.94 1.86-.33 5.71-1.8 11.56-4.42 5.84-2.61 11.08-3.8 15.71-3.57 11.96.67 21.64 5.25 29.05 13.75-10.42 6.32-15.53 15.17-15.33 26.54.21 8.95 3.65 16.51 10.33 22.68 6.68 6.17 14.5 9.8 23.46 10.89-2.29 6.86-5.11 13.77-8.47 20.73zM119.22 33.15c0-7.39 2.65-14.37 7.96-20.94 5.3-6.57 11.89-10.97 19.75-13.21.2 1.13.3 2.14.3 3.03 0 7.39-2.73 14.48-8.19 21.27-5.46 6.79-12.06 10.8-19.82 12.02z'/></svg>" />
+  <link rel="stylesheet" href="./src/styles.css" />
+</head>
+<body>
+  <!-- Ambient Backdrop -->
+  <div class="ambient-backdrop" id="ambientBackdrop"></div>
+
+  <!-- 3D WebGL Canvas Layer -->
+  <div id="webgl-container">
+    <canvas id="canvas3d"></canvas>
+  </div>
+
+  <!-- Apple Global Header -->
+  <header class="apple-nav">
+    <div class="nav-left">
+      <svg class="apple-logo" viewBox="0 0 170 170">
+        <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.69-3.04-7.69-7.85-12-14.42-6.19-9.44-11.04-20.47-14.54-33.09-3.5-12.62-5.25-24.47-5.25-35.54 0-14.9 3.69-27.18 11.07-36.83 7.37-9.65 16.71-14.61 28.01-14.89 4.8 0 10.12 1.25 15.96 3.76 5.84 2.5 9.4 3.82 10.68 3.94 1.86-.33 5.71-1.8 11.56-4.42 5.84-2.61 11.08-3.8 15.71-3.57 11.96.67 21.64 5.25 29.05 13.75-10.42 6.32-15.53 15.17-15.33 26.54.21 8.95 3.65 16.51 10.33 22.68 6.68 6.17 14.5 9.8 23.46 10.89-2.29 6.86-5.11 13.77-8.47 20.73zM119.22 33.15c0-7.39 2.65-14.37 7.96-20.94 5.3-6.57 11.89-10.97 19.75-13.21.2 1.13.3 2.14.3 3.03 0 7.39-2.73 14.48-8.19 21.27-5.46 6.79-12.06 10.8-19.82 12.02z"/>
+      </svg>
+      <span class="product-title">AirPods Max</span>
+    </div>
+
+    <ul class="nav-links">
+      <li><button class="nav-link-btn active" data-stage="0">Overview</button></li>
+      <li><button class="nav-link-btn" data-stage="1">Colorways</button></li>
+      <li><button class="nav-link-btn" data-stage="2">Controls</button></li>
+      <li><button class="nav-link-btn" data-stage="3">Canopy</button></li>
+      <li><button class="nav-link-btn" data-stage="4">Cushions</button></li>
+      <li><button class="nav-link-btn" data-stage="5">Acoustics</button></li>
+      <li><button class="nav-link-btn" data-stage="6">Smart Case</button></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="icon-btn" id="audioToggleBtn" title="Toggle Sound Cues">
+        <svg id="audioIcon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+        <span id="audioLabel">Audio</span>
+      </button>
+
+      <button class="icon-btn" id="orbitToggleBtn" title="Toggle 360° Free Orbit View">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="9"></circle>
+          <path d="M3.6 9h16.8M3.6 15h16.8"></path>
+          <path d="M11.5 3a17 17 0 0 0 0 18M12.5 3a17 17 0 0 1 0 18"></path>
+        </svg>
+        <span id="orbitLabel">360° Inspect</span>
+      </button>
+
+      <button class="buy-btn" id="navBuyBtn">Buy</button>
+    </div>
+  </header>
+
+  <!-- Left Scroll Progress Rail -->
+  <div class="scroll-progress-rail" id="progressRail">
+    <div class="rail-dot active" data-stage="0" data-tooltip="Overview"></div>
+    <div class="rail-dot" data-stage="1" data-tooltip="5 Signature Finishes"></div>
+    <div class="rail-dot" data-stage="2" data-tooltip="Digital Crown"></div>
+    <div class="rail-dot" data-stage="3" data-tooltip="Breathable Canopy"></div>
+    <div class="rail-dot" data-stage="4" data-tooltip="Magnetic Cushions"></div>
+    <div class="rail-dot" data-stage="5" data-tooltip="40mm Driver & H1"></div>
+    <div class="rail-dot" data-stage="6" data-tooltip="Smart Case & Specs"></div>
+  </div>
+
+  <!-- Floating Colorway Switcher Dock -->
+  <div class="colorway-dock" id="colorDock">
+    <div class="swatch-group">
+      <button class="color-swatch active" data-color="silver" style="background: #E1E3E6;" title="Silver"></button>
+      <button class="color-swatch" data-color="spaceGray" style="background: #3A3B3E;" title="Space Gray"></button>
+      <button class="color-swatch" data-color="skyBlue" style="background: #7A98AB;" title="Sky Blue"></button>
+      <button class="color-swatch" data-color="pink" style="background: #D87771;" title="Pink"></button>
+      <button class="color-swatch" data-color="green" style="background: #B4C2AC;" title="Green"></button>
+    </div>
+    <span class="dock-label" id="dockColorName">Silver</span>
+  </div>
+
+  <!-- Scroll Sections (Drives GSAP + Lenis Scroll Scrubbing) -->
+  <main class="scroll-container" id="scrollContainer">
+
+    <!-- Stage 1: Hero Entrance (0% - 12%) -->
+    <section class="scroll-section section-hero" id="stage-0">
+      <div class="content-wrapper visible">
+        <p class="eyebrow">Introducing</p>
+        <h1>AirPods Max</h1>
+        <p class="hero-subtitle">Computational audio. Uncompromising sound.<br/>A radically original composition.</p>
+        <div class="scroll-hint">
+          <div class="mouse-pill"></div>
+          <span>Scroll to explore</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stage 2: 5 Signature Finishes (12% - 26%) -->
+    <section class="scroll-section align-left" id="stage-1">
+      <div class="content-wrapper">
+        <p class="eyebrow">Signature Finishes</p>
+        <h2 class="section-title">A symphony of five colors.</h2>
+        <p class="section-desc">
+          Crafted from precision-anodized aluminum and acoustically engineered textile. From pristine Silver to stealth Space Gray, Sky Blue, Pink, and Green—each component is meticulously color-matched down to the micron.
+        </p>
+        <ul class="feature-bullets">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Micro-bead-blasted satin luster with specular grazing reflection
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Color-harmonized breathable knit-mesh canopy and soft-touch sleeves
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Stage 3: Digital Crown & Noise Control (26% - 44%) -->
+    <section class="scroll-section align-left" id="stage-2">
+      <div class="content-wrapper">
+        <p class="eyebrow">Hardware Precision</p>
+        <h2 class="section-title">The Digital Crown.<br/>Turn. Click. Command.</h2>
+        <p class="section-desc">
+          Inspired by Apple Watch, the knurled Digital Crown gives you tactile, pinpoint precision. Rotate smoothly to adjust volume, skip tracks, answer calls, or summon Siri with immediate haptic response.
+        </p>
+        <ul class="feature-bullets">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            42 radial milled teeth for effortless tactile grip
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Dedicated Noise Control button toggles Active Noise Cancellation & Transparency
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Stage 4: Canopy & Knit-Mesh Macro (44% - 58%) -->
+    <section class="scroll-section align-right" id="stage-3">
+      <div class="content-wrapper">
+        <p class="eyebrow">Acoustic Comfort</p>
+        <h2 class="section-title">Breathable canopy.<br/>Zero pressure points.</h2>
+        <p class="section-desc">
+          The canopy spanning the stainless-steel headband frame is made from an acoustically transparent knit mesh, distributing weight evenly to reduce on-head pressure. Telescoping arms extend smoothly and stay right where you set them.
+        </p>
+        <ul class="feature-bullets">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Custom 3D diamond-knit textile with pillow-soft memory foam
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Seamless knitted “L” and “R” acoustic cloth inside each ear chamber
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Stage 5: Magnetic Ear Cushion Detach (58% - 72%) -->
+    <section class="scroll-section align-left" id="stage-4">
+      <div class="content-wrapper">
+        <p class="eyebrow">Modular Architecture</p>
+        <h2 class="section-title">Acoustically sealed.<br/>Magnetically effortless.</h2>
+        <p class="section-desc">
+          Each ear cushion attaches via precision neodymium ring magnets. Pull to remove, or let them snap seamlessly back into the perforated acoustic baffle plate with a clean mechanical click.
+        </p>
+        <ul class="feature-bullets">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            36-aperture perforated acoustic baffle engineered for clean airflow
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Swap contrasting cushion colorways for a personalized aesthetic
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Stage 6: Engineering Exploded View (72% - 88%) -->
+    <section class="scroll-section align-left" id="stage-5">
+      <div class="content-wrapper">
+        <p class="eyebrow">Acoustic Engineering</p>
+        <h2 class="section-title">40mm dynamic driver.<br/>Dual H1 processors.</h2>
+        <p class="section-desc">
+          Equipped with a custom dual-neodymium ring magnet motor modeled after high-end floor-standing speakers. It minimizes total harmonic distortion to less than 1% across the entire audible range—even at maximum volume.
+        </p>
+        <ul class="feature-bullets">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Apple H1 chip in each cup running 9 billion operations per second
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Real-time Adaptive EQ adjusts sound to the bespoke fit of your ear cushions
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Stage 7: Smart Case & Finale Specs (88% - 100%) -->
+    <section class="scroll-section align-right" id="stage-6">
+      <div class="content-wrapper">
+        <p class="eyebrow">Intelligent Preservation</p>
+        <h2 class="section-title">A case with staying power.</h2>
+        <p class="section-desc">
+          When stored in their soft, slim Smart Case, AirPods Max swivel flat and instantly enter an ultra-low-power state that preserves battery charge for weeks.
+        </p>
+
+        <!-- Technical Specifications HUD Grid -->
+        <div class="specs-hud-grid">
+          <div class="spec-tile">
+            <div class="spec-label">Battery Life</div>
+            <div class="spec-val">20 Hours</div>
+          </div>
+          <div class="spec-tile">
+            <div class="spec-label">Fast Charge</div>
+            <div class="spec-val">5 min = 1.5 hr</div>
+          </div>
+          <div class="spec-tile">
+            <div class="spec-label">Audio Silicon</div>
+            <div class="spec-val">Dual Apple H1</div>
+          </div>
+          <div class="spec-tile">
+            <div class="spec-label">Spatial Audio</div>
+            <div class="spec-val">Dynamic Head Tracking</div>
+          </div>
+        </div>
+
+        <!-- Order Box -->
+        <div class="order-cta-box">
+          <div class="price-row">
+            <div>
+              <div class="price-val">$549</div>
+              <div class="price-term">or $45.75/mo. for 12 mo.</div>
+            </div>
+            <div class="glass-pill-badge">Free Shipping & Engraving</div>
+          </div>
+          <button class="order-btn-large" id="finaleBuyBtn">Add to Bag</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
